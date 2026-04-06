@@ -13,7 +13,7 @@ Enable GitHub Pages in your repository settings to host it live instantly!
 
 1. Go to **Settings** → **Pages**
 2. Select **main** branch as source
-3. Your site will be live at `https://yourusername.github.io/focus-flow`
+3. Your site will be live at `https://yourusername.github.io/focus-flow/focus-flow`
 
 ### Option 2: Local Development
 ```bash
