@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Flow • Meditative Productivity</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Ambient Background Canvas -->
+    <canvas id="ambient-canvas"></canvas>
+    
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <h1>Focus Flow</h1>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="timer">Timer</button>
+                <button class="nav-tab" data-tab="sounds">Soundscapes</button>
+                <button class="nav-tab" data-tab="breathing">Breathe</button>
+                <button class="nav-tab" data-tab="stats">Progress</button>
+            </nav>
+        </header>
+
+        <!-- Timer Section -->
+        <section id="timer-section" class="section active">
+            <div class="timer-display">
+                <div class="timer-mode-indicator">
+                    <span class="mode-dot focus"></span>
+                    <span id="current-mode">Deep Focus</span>
+                </div>
+                <div class="time-display">
+                    <span id="minutes">25</span>
+                    <span class="colon">:</span>
+                    <span id="seconds">00</span>
+                </div>
+                <div class="progress-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                        <circle class="progress-bar" cx="60" cy="60" r="54" 
+                                stroke-dasharray="339.292" stroke-dashoffset="0" id="progress-circle"/>
+                    </svg>
+                </div>
+                <div class="timer-controls">
+                    <button class="control-btn primary" id="start-btn">
+                        <span class="btn-icon">▶</span>
+                        <span class="btn-text">Begin Flow</span>
+                    </button>
+                    <button class="control-btn secondary" id="pause-btn" style="display:none;">
+                        <span class="btn-icon">⏸</span>
+                        <span class="btn-text">Pause</span>
+                    </button>
+                    <button class="control-btn ghost" id="reset-btn">
+                        <span class="btn-icon">↺</span>
+                    </button>
+                </div>
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-duration="25" data-mode="focus">
+                        <span class="mode-icon">🎯</span>
+                        <span class="mode-label">Focus</span>
+                        <span class="mode-time">25:00</span>
+                    </button>
+                    <button class="mode-btn" data-duration="5" data-mode="short">
+                        <span class="mode-icon">☕</span>
+                        <span class="mode-label">Short Break</span>
+                        <span class="mode-time">5:00</span>
+                    </button>
+                    <button class="mode-btn" data-duration="15" data-mode="long">
+                        <span class="mode-icon">🌿</span>
+                        <span class="mode-label">Long Break</span>
+                        <span class="mode-time">15:00</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Task Input -->
+            <div class="task-section">
+                <div class="task-input-wrapper">
+                    <input type="text" id="task-input" placeholder="What will you focus on?" autocomplete="off">
+                    <button class="add-task-btn" id="add-task-btn">+</button>
+                </div>
+                <div class="task-list" id="task-list">
+                    <!-- Tasks will be added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Soundscapes Section -->
+        <section id="sounds-section" class="section">
+            <h2 class="section-title">Ambient Soundscapes</h2>
+            <p class="section-subtitle">Layer sounds to create your perfect focus environment</p>
+            
+            <div class="soundscape-grid">
+                <div class="sound-card" data-sound="rain">
+                    <div class="sound-icon">🌧️</div>
+                    <h3>Rain</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="rain">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="forest">
+                    <div class="sound-icon">🌲</div>
+                    <h3>Forest</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="forest">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="waves">
+                    <div class="sound-icon">🌊</div>
+                    <h3>Waves</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="waves">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="cafe">
+                    <div class="sound-icon">☕</div>
+                    <h3>Café</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="cafe">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="wind">
+                    <div class="sound-icon">💨</div>
+                    <h3>Wind</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="wind">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="fire">
+                    <div class="sound-icon">🔥</div>
+                    <h3>Fireplace</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="fire">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="birds">
+                    <div class="sound-icon">🐦</div>
+                    <h3>Birds</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="birds">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+                
+                <div class="sound-card" data-sound="white-noise">
+                    <div class="sound-icon">📻</div>
+                    <h3>White Noise</h3>
+                    <div class="volume-control">
+                        <input type="range" min="0" max="100" value="0" class="volume-slider" data-sound="white-noise">
+                        <span class="volume-value">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="presets-section">
+                <h3>Quick Presets</h3>
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-preset="deep-work">Deep Work</button>
+                    <button class="preset-btn" data-preset="relaxation">Relaxation</button>
+                    <button class="preset-btn" data-preset="nature">Nature</button>
+                    <button class="preset-btn" data-preset="coffee-shop">Coffee Shop</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breathing Section -->
+        <section id="breathing-section" class="section">
+            <h2 class="section-title">Breathing Exercise</h2>
+            <p class="section-subtitle">Center yourself before or after focused work</p>
+            
+            <div class="breathing-container">
+                <div class="breathing-circle" id="breathing-circle">
+                    <div class="breathing-text" id="breathing-text">Ready</div>
+                </div>
+                <div class="breathing-controls">
+                    <button class="control-btn primary" id="breathe-start-btn">
+                        <span class="btn-icon">🫁</span>
+                        <span class="btn-text">Start Exercise</span>
+                    </button>
+                    <select id="breathing-pattern" class="pattern-select">
+                        <option value="box">Box Breathing (4-4-4-4)</option>
+                        <option value="relax">4-7-8 Relaxation</option>
+                        <option value="energy">Energizing (4-4-4-4)</option>
+                        <option value="calm">Calming (5-5-5-5)</option>
+                    </select>
+                </div>
+                <div class="breathing-info">
+                    <p>Follow the circle: <strong>Expand</strong> as it grows, <strong>Contract</strong> as it shrinks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats-section" class="section">
+            <h2 class="section-title">Your Progress</h2>
+            <p class="section-subtitle">Track your focus journey</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="total-focus-time">0h 0m</div>
+                    <div class="stat-label">Total Focus Time</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="completed-sessions">0</div>
+                    <div class="stat-label">Sessions Completed</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-value" id="current-streak">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value" id="today-sessions">0</div>
+                    <div class="stat-label">Today's Sessions</div>
+                </div>
+            </div>
+            
+            <div class="weekly-chart">
+                <h3>This Week</h3>
+                <div class="chart-container" id="weekly-chart">
+                    <!-- Chart bars will be generated here -->
+                </div>
+            </div>
+            
+            <div class="achievements">
+                <h3>Achievements</h3>
+                <div class="achievements-grid" id="achievements-list">
+                    <!-- Achievements will be populated here -->
+                </div>
+            </div>
+            
+            <button class="clear-data-btn" id="clear-data-btn">Reset All Data</button>
+        </section>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- Completion Modal -->
+    <div class="modal" id="completion-modal">
+        <div class="modal-content">
+            <div class="modal-icon">✨</div>
+            <h2>Session Complete!</h2>
+            <p>Great work! Take a moment to appreciate your progress.</p>
+            <button class="control-btn primary" id="continue-btn">Continue</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
