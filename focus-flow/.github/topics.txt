@@ -1,0 +1,2 @@
+# Add your topics here (comma-separated, max 20)
+productivity,pomodoro-timer,focus,meditation,mindfulness,javascript,vanilla-js,web-app,open-source,wellness,breathing-exercises,ambient-sounds,time-management,deep-work,flow-state,study-tool,developer-tools,student-resources,remote-work,work-from-home
