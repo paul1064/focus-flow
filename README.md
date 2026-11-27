@@ -1,7 +1,3 @@
---- focus-flow/.github/WELCOME.md (原始)
-
-
-+++ focus-flow/.github/WELCOME.md (修改后)
 # 🎉 Welcome to Focus Flow!
 
 Thank you for checking out this project! Here are some quick tips to get the most out of your experience:
